@@ -11,10 +11,10 @@ class FeaturedNewsListCubit extends Cubit<FeaturedNewsListState> {
 
   FeaturedNewsListCubit(this._newsRepository)
       : super(FeaturedNewsListLoading()) {
-    fetchArticles();
+    _fetchArticles();
   }
 
-  Future<void> fetchArticles() async {
+  Future<void> _fetchArticles() async {
     emit(FeaturedNewsListLoading());
 
     try {

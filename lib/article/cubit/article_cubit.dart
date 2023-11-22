@@ -12,10 +12,10 @@ class ArticleCubit extends Cubit<ArticleState> {
 
   ArticleCubit({required this.newsRepository, required this.articleId})
       : super(ArticleLoading()) {
-    fetchArticle(articleId);
+    _fetchArticle(articleId);
   }
 
-  Future<void> fetchArticle(String articleId) async {
+  Future<void> _fetchArticle(String articleId) async {
     if (articleId.isEmpty) {
       emit(ArticleError());
       return;

@@ -18,7 +18,41 @@ class NewsPage extends StatelessWidget {
       create: (context) =>
           LatestNewsListCubit(context.read<AbstractNewsRepository>()),
       child: Scaffold(
-        appBar: AppBar(
+        appBar: _NotificationsAppBar(),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 28),
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Text(
+                  'Featured',
+                  style: theme.textTheme.titleLarge,
+                ),
+              ),
+              const SliverToBoxAdapter(child: AppTheme.verticalSpacing),
+              const FeaturedNewsSliver(),
+              const SliverToBoxAdapter(child: AppTheme.verticalSpacing),
+              SliverToBoxAdapter(
+                child: Text(
+                  'Latest news',
+                  style: theme.textTheme.titleLarge,
+                ),
+              ),
+              const SliverToBoxAdapter(child: AppTheme.verticalSpacing),
+              const SliverToBoxAdapter(child: LatestNewsWidget()),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _NotificationsAppBar extends AppBar {
+  _NotificationsAppBar({Key? key})
+      : super(
+          key: key,
+          centerTitle: true,
           title: const Text('Notifications'),
           leading: IconButton(
             icon: const Icon(
@@ -28,44 +62,7 @@ class NewsPage extends StatelessWidget {
             onPressed: () {},
           ),
           actions: const [_MarkAllAsReadButton()],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 28),
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Featured',
-                      style: theme.textTheme.titleLarge,
-                    ),
-                    AppTheme.verticalSpacing,
-                  ],
-                ),
-              ),
-              const FeaturedNewsWidget(),
-              SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppTheme.verticalSpacing,
-                    Text(
-                      'Latest news',
-                      style: theme.textTheme.titleLarge,
-                    ),
-                    AppTheme.verticalSpacing,
-                    const LatestNewsWidget(),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+        );
 }
 
 class _MarkAllAsReadButton extends StatelessWidget {

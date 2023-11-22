@@ -6,8 +6,8 @@ import '../repositories/news/repository.dart';
 import 'cubit/featured_news_list_cubit.dart';
 import 'featured_card.dart';
 
-class FeaturedNewsWidget extends StatelessWidget {
-  const FeaturedNewsWidget({Key? key}) : super(key: key);
+class FeaturedNewsSliver extends StatelessWidget {
+  const FeaturedNewsSliver({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

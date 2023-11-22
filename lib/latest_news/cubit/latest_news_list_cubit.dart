@@ -9,10 +9,10 @@ class LatestNewsListCubit extends Cubit<LatestNewsListState> {
   final AbstractNewsRepository _newsRepository;
 
   LatestNewsListCubit(this._newsRepository) : super(LatestNewsListLoading()) {
-    fetchArticles();
+    _fetchArticles();
   }
 
-  Future<void> fetchArticles() async {
+  Future<void> _fetchArticles() async {
     emit(LatestNewsListLoading());
 
     try {
@@ -28,7 +28,7 @@ class LatestNewsListCubit extends Cubit<LatestNewsListState> {
     try {
       await _newsRepository.markArticleAsRead(articleId);
 
-      await fetchArticles();
+      await _fetchArticles();
     } on Exception {
       return;
     }
@@ -37,6 +37,6 @@ class LatestNewsListCubit extends Cubit<LatestNewsListState> {
   Future<void> markAllArticlesAsRead() async {
     await _newsRepository.markAllArticlesAsRead();
 
-    await fetchArticles();
+    await _fetchArticles();
   }
 }
